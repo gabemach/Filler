@@ -39,13 +39,11 @@ char		*fstring(t_ftpf *ftpf, long double fpart, char *fstr)
 
 char		*ftoa(long double num, t_ftpf *ftpf)
 {
-	int				i;
 	char			*str;
 	char			*fstr;
 	intptr_t		ipart;
 	long double		fpart;
 
-	i = 0;
 	ipart = (intptr_t)num;
 	ftpf->sinum = ipart;
 	fpart = num - (long double)ipart;

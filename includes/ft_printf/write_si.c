@@ -79,9 +79,9 @@ intptr_t	check_siconv(t_ftpf *ftpf)
 	intptr_t	num;
 
 	if (ft_strcmp(ftpf->cnvrsn, "hh") == 1)
-		num = (signed char)va_arg(ftpf->ap, void *);
+		num = (signed char)va_arg(ftpf->ap, int);
 	else if (ft_strcmp(ftpf->cnvrsn, "h") == 0)
-		num = (short)va_arg(ftpf->ap, void *);
+		num = (short)va_arg(ftpf->ap, int);
 	else if (ft_strcmp(ftpf->cnvrsn, "l") == 0)
 		num = (long)va_arg(ftpf->ap, void *);
 	else if (ft_strcmp(ftpf->cnvrsn, "ll") == 1)

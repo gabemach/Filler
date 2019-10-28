@@ -16,6 +16,20 @@
 #include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
 
+typedef struct	s_map
+{
+	int	fd1;
+	int	fd2;
+	int	x;
+	int	y;
+}		t_map;
 
+typedef struct	s_piece
+{
+	int	fd1;
+	int	fd2;
+	int	x;
+	int	y;
+}		t_piece;
 
 #endif

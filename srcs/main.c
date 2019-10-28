@@ -12,7 +12,20 @@
 
 #include "../includes/filler.h"
 
-int	main()
+void	init_structs(t_map *map, t_piece *piece)
 {
+	
+}
 
+int	main(void)
+{
+	t_map	*map;
+	t_piece	*piece;
+
+	map = (t_map)malloc(sizeof(*map));
+	piece = (t_piece)malloc(sizeof(*piece));
+	init_structs(&map, &piece);
+	free(map);
+	free(piece);
+	return (0);
 }

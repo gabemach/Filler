@@ -102,9 +102,9 @@ uintptr_t	check_uiconv(t_ftpf *ftpf)
 	uintptr_t	num;
 
 	if (ft_strcmp(ftpf->cnvrsn, "hh") == 1)
-		num = (unsigned char)va_arg(ftpf->ap, void *);
+		num = (unsigned char)va_arg(ftpf->ap, unsigned int);
 	else if (ft_strcmp(ftpf->cnvrsn, "h") == 0)
-		num = (unsigned short)va_arg(ftpf->ap, void *);
+		num = (unsigned short)va_arg(ftpf->ap, unsigned int);
 	else if (ft_strcmp(ftpf->cnvrsn, "l") == 0)
 		num = (unsigned long)va_arg(ftpf->ap, void *);
 	else if (ft_strcmp(ftpf->cnvrsn, "ll") == 1)
