@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   players.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/31 13:43:21 by gmachado          #+#    #+#             */
-/*   Updated: 2019/10/31 13:43:21 by gmachado         ###   ########.fr       */
+/*   Created: 2019/10/31 15:12:55 by gmachado          #+#    #+#             */
+/*   Updated: 2019/10/31 15:12:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-void    fill_map(t_map *map)
+void	current_player(t_map *map)
 {
-    int     i;
-    char    *line;
-
-    i = 0;
+	char	*line;
+	
     get_next_line(0, &line);
+	if (ft_strncmp(line, "$$$", 2) == 0 && map->current_player = 0)
+	{
+		if (ft_strstr(line, "p1"))
+			map->current_player = 1;
+		if (ft_strstr(line, "p2"))
+			map->current_player = 2;
+	}
     ft_strdel(&line);
-    map->map = (char **)malloc(sizeof(char *) * (map->size_y + 1));
-
 }
