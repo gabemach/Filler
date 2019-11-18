@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filler.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachado <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:14:35 by gmachado          #+#    #+#             */
-/*   Updated: 2019/10/24 12:15:51 by gmachado         ###   ########.fr       */
+/*   Updated: 2019/10/31 15:17:35 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,24 @@
 
 typedef struct	s_map
 {
-	int	fd1;
-	int	fd2;
-	int	x;
-	int	y;
-}		t_map;
+	char		**map;
+	int			size_x;
+	int			size_y;
+	int			current_player;
+	char		*p1;
+	int			p1_pos_x;
+	int			p1_pos_y;
+	char		*p2;
+	int			p2_pos_x;
+	int			p2_pos_y;
+}				t_map;
 
 typedef struct	s_piece
 {
-	int	fd1;
-	int	fd2;
-	int	x;
-	int	y;
+	int	piece_x;
+	int	piece_y;
 }		t_piece;
+
+void	current_player(t_map *map);
 
 #endif

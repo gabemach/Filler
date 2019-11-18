@@ -16,10 +16,14 @@ void    fill_map(t_map *map)
 {
     int     i;
     char    *line;
+    char    **temp;
 
     i = 0;
     get_next_line(0, &line);
-    ft_strdel(&line);
+    temp = line;
+    free(&line);
     map->map = (char **)malloc(sizeof(char *) * (map->size_y + 1));
-
+    while (temp[map->size_x])
+        map->size_x++;
+    
 }
