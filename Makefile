@@ -3,13 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmachado <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/24 12:00:34 by gmachado          #+#    #+#              #
-#    Updated: 2019/10/24 12:14:17 by gmachado         ###   ########.fr        #
+#    Updated: 2019/11/18 13:50:57 by gmachado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME: <login>.filler
-
+NAME: gmachado.filler
 

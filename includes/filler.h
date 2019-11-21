@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:14:35 by gmachado          #+#    #+#             */
-/*   Updated: 2019/10/31 15:17:35 by gmachado         ###   ########.fr       */
+/*   Updated: 2019/11/20 17:14:21 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@
 
 typedef struct	s_map
 {
+	char		**map_y;
+	char		*map_x;
 	char		**map;
-	int			size_x;
-	int			size_y;
+	int			max_size_x;
+	int			max_size_y;
 	int			current_player;
 	char		*p1;
 	int			p1_pos_x;
@@ -37,5 +39,6 @@ typedef struct	s_piece
 }		t_piece;
 
 void	current_player(t_map *map);
+void	read_map(char *line, t_map *map);
 
 #endif

@@ -10,7 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../includes/filler.h"
+
+/*
+check fit
+{
+    int i;
+    int p;
+
+    i = 2;
+    p = 4;
+    while ((map[p] != 'o' || map[p] != 'O') && map[p] < map[map->max_size_y])
+}
+*/
 
 /*
 int checker 1

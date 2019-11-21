@@ -17,7 +17,7 @@ void	current_player(t_map *map)
 	char	*line;
 	
     get_next_line(0, &line);
-	if (ft_strncmp(line, "$$$", 2) == 0 && map->current_player = 0)
+	if (ft_strncmp(line, "$$$", 2) == 0 && map->current_player == 0)
 	{
 		if (ft_strstr(line, "p1"))
 			map->current_player = 1;
