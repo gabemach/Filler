@@ -34,22 +34,55 @@ int     parse_arrays(t_map *map, t_piece *piece)
     return (0);
 }
 
-void    read_map(char *line, t_map *map)
+void    find_pos(t_map *map, char *str, int i)
 {
+    int         x_pos;
+    static int  y_pos;
+
+    if (y_pos == map->max_size_y)
+        return ;
+    y_pos = 0;
+}
+
+void    fill_map(t_map *map)
+{
+    char    *line;
     int     i;
-    char    **temp;
 
     i = 0;
-    while (get_next_line(0, &line))
+    get_next_line(0, &line);
+    ft_strdel(&line);
+    map->map = (char **)malloc(sizeof(char *) * (map->max_size_y + 1));
+    while (i++ <= map->max_size_y - 1)
     {
-        map->max_size_y++;
-        free(line);
+        get_next_line(0, &line);
+        map->map[i] = ft_strdup((const char *)(&line[4]));
+        ft_strdel(&line);
     }
-    free(&line);
-    map->map_y = (char **)malloc(sizeof(char *) * (map->max_size_y + 1));
-    while (i++ < map->max_size_y)
-        map->map_x[i] = (char)ft_memalloc(sizeof(char) * (map->max_size_x + 1));
-    while (temp[map->max_size_x])
-        map->max_size_x++;
+
+}
+
+void    read_map_size(char *line, t_map *map)
+{
+    int     i;
+    int     temp;
     
+    i = 0;
+    while (line[i])
+    {
+        temp = 0;
+        while (ft_isdigit(line[i]) == 0 && line[i])
+        {
+            temp += line[i] - 48;
+            if (ft_isdigit(line[i + 1]) == 0)
+                temp *= 10;
+            i++;
+        }
+        if (map->max_size_y == 0)
+            map->max_size_y = temp;
+        else if (map->max_size_x == 0)
+            map->max_size_x = temp;
+        i++;
+    }
+    fill_map(map);
 }
