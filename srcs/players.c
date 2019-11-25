@@ -12,6 +12,14 @@
 
 #include "../includes/filler.h"
 
+void	assign_token(t_map *map)
+{
+	if (map->current_player == 1)
+		map->p1 = "Oo";
+	if (map->current_player == 2)
+		map->p2 = "Xx";
+}
+
 void	current_player(t_map *map)
 {
 	char	*line;
@@ -23,6 +31,7 @@ void	current_player(t_map *map)
 			map->current_player = 1;
 		if (ft_strstr(line, "p2"))
 			map->current_player = 2;
+		assign_token(map);
 	}
     ft_strdel(&line);
 }

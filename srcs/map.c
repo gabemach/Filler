@@ -12,28 +12,6 @@
 
 #include "../includes/filler.h"
 
-int     parse_arrays(t_map *map, t_piece *piece)
-{
-    char    *line;
-
-    while (get_next_line(0, &line) == 1)
-    {
-        if (ft_strncmp(line, "Plateau", 7 == 0))
-        {
-            read_map(line, map);
-            ft_strdel(&line);
-        }
-        else if (ft_strncmp(line, "Piece", 4))
-        {
-            //check piece
-            return (1);
-        }
-        else
-            ft_strdel(&line);
-    }
-    return (0);
-}
-
 void    find_pos(t_map *map, char *str, int i)
 {
     int         x_pos;
@@ -42,6 +20,25 @@ void    find_pos(t_map *map, char *str, int i)
     if (y_pos == map->max_size_y)
         return ;
     y_pos = 0;
+    while (++y_pos < map->max_size_y)
+    {
+        x_pos = 0;
+        while (++x_pos < map->max_size_x)
+        {
+            if (map->map[y_pos][x_pos] == map->p1[0] ||
+                    map->map[y_pos][x_pos] == map->p1[1])
+                {
+                    map->p1_pos_y = y_pos;
+                    map->p1_pos_x = x_pos;
+                }
+            if (map->map[y_pos][x_pos] == map->p2[0] ||
+                    map->map[y_pos][x_pos] == map->p2[1])
+                {
+                    map->p2_pos_y = y_pos;
+                    map->p2_pos_x = x_pos;
+                }
+        }
+    }
 }
 
 void    fill_map(t_map *map)
@@ -59,7 +56,7 @@ void    fill_map(t_map *map)
         map->map[i] = ft_strdup((const char *)(&line[4]));
         ft_strdel(&line);
     }
-
+    find_pos(map, line, i);
 }
 
 void    read_map_size(char *line, t_map *map)
