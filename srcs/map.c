@@ -25,17 +25,17 @@ void    find_pos(t_map *map, char *str, int i)
         x_pos = 0;
         while (++x_pos < map->max_size_x)
         {
-            if (map->map[y_pos][x_pos] == map->p1[0] ||
-                    map->map[y_pos][x_pos] == map->p1[1])
+            if (map->map[y_pos][x_pos] == map->hmn[0] ||
+                    map->map[y_pos][x_pos] == map->hmn[1])
                 {
-                    map->p1_pos_y = y_pos;
-                    map->p1_pos_x = x_pos;
+                    map->hmn_pos_y = y_pos;
+                    map->hmn_pos_x = x_pos;
                 }
-            if (map->map[y_pos][x_pos] == map->p2[0] ||
-                    map->map[y_pos][x_pos] == map->p2[1])
+            if (map->map[y_pos][x_pos] == map->opp[0] ||
+                    map->map[y_pos][x_pos] == map->opp[1])
                 {
-                    map->p2_pos_y = y_pos;
-                    map->p2_pos_x = x_pos;
+                    map->opp_pos_y = y_pos;
+                    map->opp_pos_x = x_pos;
                 }
         }
     }

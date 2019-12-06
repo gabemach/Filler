@@ -14,10 +14,16 @@
 
 void	assign_token(t_map *map)
 {
-	if (map->current_player == 1)
-		map->p1 = "Oo";
-	if (map->current_player == 2)
-		map->p2 = "Xx";
+	if (map->player_number == 1)
+	{
+		map->hmn = "Oo";
+		map->opp = "Xx";
+	}
+	if (map->player_number == 2)
+	{
+		map->hmn = "Xx";
+		map->opp = "Oo";
+	}
 }
 
 void	current_player(t_map *map)
@@ -25,12 +31,12 @@ void	current_player(t_map *map)
 	char	*line;
 	
     get_next_line(0, &line);
-	if (ft_strncmp(line, "$$$", 2) == 0 && map->current_player == 0)
+	if (ft_strncmp(line, "$$$", 2) == 0 && map->player_number == 0)
 	{
 		if (ft_strstr(line, "p1"))
-			map->current_player = 1;
+			map->player_number = 1;
 		if (ft_strstr(line, "p2"))
-			map->current_player = 2;
+			map->player_number = 2;
 		assign_token(map);
 	}
     ft_strdel(&line);
