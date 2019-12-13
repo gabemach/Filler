@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:14:35 by gmachado          #+#    #+#             */
-/*   Updated: 2019/11/24 19:29:37 by gmachado         ###   ########.fr       */
+/*   Updated: 2019/12/11 13:55:21 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,32 @@ typedef struct	s_map
 	char		**map;
 	int			max_size_x;
 	int			max_size_y;
-	int			current_player;
-	char		*p1;
-	int			p1_pos_x;
-	int			p1_pos_y;
-	char		*p2;
-	int			p2_pos_x;
-	int			p2_pos_y;
+	int			player_number;
+	char		*hmn;
+	int			hmn_pos_x;
+	int			hmn_pos_y;
+	char		*opp;
+	int			opp_pos_x;
+	int			opp_pos_y;
 }				t_map;
 
 typedef struct	s_piece
 {
-	int			piece_size_x;
-	int			piece_size_y;
-	int			touch;
+	char		**piece;
+	int			x_size;
+	int			x_real;
+	int			y_size;
+	int			y_real;
+	int			x_start;
+	int			y_start;
+	int			x_end;
+	int			y_end;
+	int			such_touch;
+	int			much_touch;
 	int			loc_x;
 	int			loc_y;
+	int			latest_x;
+	int			latest_y;
 }				t_piece;
 
 void	current_player(t_map *map);
