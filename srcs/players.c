@@ -26,7 +26,11 @@ void	assign_token(t_map *map)
 	}
 }
 
-void	current_player(t_map *map)
+/*
+**	determines which player the algorithm has been assigned to
+*/
+
+void	who_is_who(t_map *map)
 {
 	char	*line;
 	

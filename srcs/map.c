@@ -59,7 +59,7 @@ void    fill_map(t_map *map)
     find_pos(map, line, i);
 }
 
-void    read_map_size(char *line, t_map *map)
+void    parse_map(char *line, t_map *map)
 {
     int     i;
     int     temp;

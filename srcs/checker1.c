@@ -12,108 +12,102 @@
 
 #include "../includes/filler.h"
 
-int do_they_touch(t_piece *piece, t_map *map)
+int try_spot(t_piece *piece, int xyz, int x, int y)
 {
-    int y;
-    int x;
-
-    y = 0;
-    while (y++ < map->max_size_y - 3)
+    if (xyz == 1)
     {
-        x = 0;
-        while (x++ < map->max_size_x - 3)
-        {
-            if (map->map[y][x] == map->hmn[0] || map->map[y][x] == map->hmn[1])
-                if (map->map[y][x + 3] == map->opp[0] || map->map[y][x - 3] ==
-                    map->opp[0] || map->map[y][x + 3] == map->opp[1] ||
-                    map->map[y][x - 3] == map->opp[1] || map->map[y + 3][x] ==
-                    map->opp[0] || map->map[y - 3][x] == map->opp[0] ||
-                    map->map[y + 3][x] == map->opp[1] || map->map[y - 3][x] ==
-                    map->opp[1])
-                    return (1);
-        }
-    return (0);
-    }
-}
-
-int how_much_touch(t_piece *piece, t_map *map, int x, int y)
-{
-    int iy;
-    int ix;
-    int d;
-
-    iy = 0;
-    piece->much_touch = 0;
-    while (iy++ < piece->y_size)
-    {
-        ix = 0;
-        while (ix++ < piece->x_size)
-            if (piece->piece[iy][ix] == '*')
-            {
-                d = 1;
-                while (d++ < 4)
-                    if (ix + x + d < map->max_size_x && ix + x - d > 0
-                        && iy + y + d < map->max_size_y && iy + y - d > 0)
-                        if (map->map[iy + y][ix + x + d] == map->opp[0] ||
-                            map->map[iy + y][ix + x - d] == map->opp[0] ||
-                            map->map[iy + y + d][ix + x] == map->opp[0] ||
-                            map->map[iy + y - d][ix + x] == map->opp[0])
-                            piece->much_touch += 4 - d;
-            }
-    }
-    return (piece->much_touch);
-}
-
-
-int cover_1(t_piece *piece, t_map *map, int x, int y)
-{
-    int check;
-    int spot_x;
-    int spot_y;
-
-    check = 0;
-    spot_y = 0;
-    if (piece->x_size > map->max_size_x || piece->y_size > map->max_size_y)
+        piece->latest_x = x;
+        piece->latest_y = y;
         return (0);
-    while (check < 2)
-        while (spot_y++ < map->max_size_y)
+    }
+    return (1);
+}
+
+int valid_spot(t_piece *piece, t_map *map, int x, int y)
+{
+    int xyz;
+    int x1;
+    int y1;
+
+    y1 = 0;
+    xyz = 0;
+    if (piece->y_size + y > map->max_size_y ||
+        piece->x_size + x > map->max_size_x)
+        return (1);
+    while (y1++ < piece->y_size - 1)
+    {
+        while (x1++ < piece->x_size - 1)
         {
-            spot_x = 0;
-            while (spot_x++ < map->max_size_x)
-                if ((piece->piece[spot_y][spot_x] == '*' &&
-                    piece->piece[spot_y][spot_x] == map->hmn[0]) ||
-                    (piece->piece[spot_y][spot_x] == '*' && 
-                    piece->piece[spot_y][spot_x] == map->hmn[1]))
-                    check += 1;
-            if (check != 1)
+            if (piece->piece[y1][x1] == '*' && (map->map[y + y1][x + x1] ==
+                map->opp[0] || map->map[y + y1][x + x1] == map->opp[1]))
                 return (1);
+            if (piece->piece[y1][x1] == '*' && (map->map[y + y1][x + x1] ==
+                map->hmn[0] || map->map[y + y1][x + x1] == map->opp[1]))
+                xyz++;
         }
-    return (0);
+    }
+    if (try_spot(piece, xyz, x, y) == 0)
+        return (0);
+    return (1);
 }
 
 
 int bottom_to_top(t_piece *piece, t_map *map)
 {
-    return (0);
+    int x;
+    int y;
+    int place;
+
+    y = map->max_size_y;
+    piece->latest_y = 0;
+    piece->latest_x = 0;
+    place = 0;
+    while (y-- > 0)
+    {
+        x = 0;
+        while (x++ < map->max_size_x)
+        {
+            place = valid_spot(piece, map, x, y);
+            if (place == 0)
+            {
+                place_piece(piece, map);
+                return (0);
+            }
+        }
+    }
+    return (1);
 }
 
 int top_to_bottom(t_piece *piece, t_map *map)
 {
     int x;
     int y;
+    int place;
 
     y = 0;
+    piece->latest_y = 0;
+    piece->latest_x = 0;
+    place = 0;
     while (y++ < map->max_size_y)
     {
         x = 0;
-        while (x < map->max_size_x)
+        while (x++ < map->max_size_x)
         {
-            if (map->map[y][x] == map->hmn[0] || map->map[y][x] == map->hmn[1])
-                return (1);
+            place = valid_spot(piece, map, x, y);
+            if (place == 0)
+            {
+                place_piece(piece, map);
+                return (0);
+            }
         }
     }
-    return (0);
+    return (1);
 }
+
+/*
+**  Determines which direction the algorithm should check depending on
+**  the player location.
+*/
 
 int how_to_fill(t_piece *piece, t_map *map)
 {

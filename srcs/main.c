@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:21:27 by gmachado          #+#    #+#             */
-/*   Updated: 2019/12/03 12:56:24 by gmachado         ###   ########.fr       */
+/*   Updated: 2019/12/16 16:32:40 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void    place_piece(t_piece *piece, t_map *map)
     map->hmn_pos_x = piece->loc_x;
 }
 
+/*
+**  Sets up map and piece arrays
+*/
+
 int     parse_arrays(t_map *map, t_piece *piece)
 {
     char    *line;
@@ -30,7 +34,7 @@ int     parse_arrays(t_map *map, t_piece *piece)
     {
         if (ft_strncmp(line, "Plateau", 7 == 0))
         {
-            read_map(line, map);
+            parse_map(line, map);
             ft_strdel(&line);
         }
         else if (ft_strncmp(line, "Piece", 4))
@@ -60,8 +64,8 @@ void	init_structs(t_map *map, t_piece *piece)
     piece->y_start = 0;
     piece->x_end = 0;
     piece->y_end = 0;
-    piece->last_x = 0;
-    piece->last_y = 0;
+    piece->latest_x = 0;
+    piece->latest_y = 0;
 }
 
 int	main(void)
@@ -72,10 +76,18 @@ int	main(void)
 	map = (t_map *)malloc(sizeof(*map));
 	piece = (t_piece *)malloc(sizeof(*piece));
 	init_structs(map, piece);
+    who_is_who(map);
 	while (1)
 	{
 		parse_arrays(map, piece);
-		
+		if (how_to_fill(piece, map) == 1)
+        {
+            if (endgame (piece, map) == 1)
+            {
+                place_piece(piece, map);
+                exit(1);
+            }
+        }
 	}
 	free(map);
 	free(piece);
