@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:14:35 by gmachado          #+#    #+#             */
-/*   Updated: 2019/12/11 13:55:21 by gmachado         ###   ########.fr       */
+/*   Updated: 2019/12/16 16:35:21 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,10 @@ typedef struct	s_piece
 void	current_player(t_map *map);
 void	read_map(char *line, t_map *map);
 int		parse_arrays(t_map *map, t_piece *piece);
+void	place_piece(t_piece *piece, t_map *map);
+void	parse_piece_size(t_piece *piece, char *line);
+void	parse_map(char *line, t_map *map);
+void	who_is_who(t_map *map);
+int		valid_spot(t_piece *piece, t_map *map, int x, int y);
 
 #endif

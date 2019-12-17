@@ -19,9 +19,9 @@ OFILES = *.o
 all: $(NAME)
 
 $(NAME):
-	gcc -c -Wall -Wextra -Werror -I libft.h $(CFILES)
-	ar rc $(NAME) $(OFILES)
-	ranlib $(NAME)
+	@ gcc -c -Wall -Wextra -Werror -I libft.h $(CFILES)
+	@ ar rc $(NAME) $(OFILES)
+	@ ranlib $(NAME)
 
 clean:
 	rm -f $(OFILES)
