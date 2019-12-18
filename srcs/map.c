@@ -12,7 +12,7 @@
 
 #include "../includes/filler.h"
 
-void    find_pos(t_map *map, char *str, int i)
+void    find_pos(t_map *map)
 {
     int         x_pos;
     static int  y_pos;
@@ -56,7 +56,7 @@ void    fill_map(t_map *map)
         map->map[i] = ft_strdup((const char *)(&line[4]));
         ft_strdel(&line);
     }
-    find_pos(map, line, i);
+    find_pos(map);
 }
 
 void    parse_map(char *line, t_map *map)

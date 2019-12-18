@@ -6,15 +6,15 @@
 /*   By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:14:35 by gmachado          #+#    #+#             */
-/*   Updated: 2019/12/16 16:35:21 by gmachado         ###   ########.fr       */
+/*   Updated: 2019/12/17 14:07:45 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-#include "./libft/libft.h"
-#include "./ft_printf/ft_printf.h"
+# include "libft/libft.h"
+# include "ft_printf/ft_printf.h"
 
 typedef struct	s_map
 {
@@ -51,6 +51,8 @@ typedef struct	s_piece
 	int			latest_y;
 }				t_piece;
 
+int		how_to_fill(t_piece *piece, t_map *map);
+int		endgame(t_piece *piece, t_map *map);
 void	current_player(t_map *map);
 void	read_map(char *line, t_map *map);
 int		parse_arrays(t_map *map, t_piece *piece);

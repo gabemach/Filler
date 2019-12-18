@@ -6,7 +6,7 @@
 #    By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 15:50:16 by gmachado          #+#    #+#              #
-#    Updated: 2019/09/03 16:56:08 by gmachado         ###   ########.fr        #
+#    Updated: 2019/12/17 13:47:38 by gmachado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,10 @@ $(NAME):
 	@ ranlib $(NAME)
 
 clean:
-	rm -f $(OFILES)
+	@ rm -f $(OFILES)
 
 fclean:
-	rm -f $(OFILES) $(NAME)
+	@ rm -f $(OFILES) $(NAME)
 
 re: fclean all
 

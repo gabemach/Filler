@@ -12,58 +12,6 @@
 
 #include "../includes/filler.h"
 
-int do_they_touch(t_piece *piece, t_map *map)
-{
-    int y;
-    int x;
-
-    y = 0;
-    while (y++ < map->max_size_y - 3)
-    {
-        x = 0;
-        while (x++ < map->max_size_x - 3)
-        {
-            if (map->map[y][x] == map->hmn[0] || map->map[y][x] == map->hmn[1])
-                if (map->map[y][x + 3] == map->opp[0] || map->map[y][x - 3] ==
-                    map->opp[0] || map->map[y][x + 3] == map->opp[1] ||
-                    map->map[y][x - 3] == map->opp[1] || map->map[y + 3][x] ==
-                    map->opp[0] || map->map[y - 3][x] == map->opp[0] ||
-                    map->map[y + 3][x] == map->opp[1] || map->map[y - 3][x] ==
-                    map->opp[1])
-                    return (1);
-        }
-    return (0);
-    }
-}
-
-int how_much_touch(t_piece *piece, t_map *map, int x, int y)
-{
-    int iy;
-    int ix;
-    int d;
-
-    iy = 0;
-    piece->much_touch = 0;
-    while (iy++ < piece->y_size)
-    {
-        ix = 0;
-        while (ix++ < piece->x_size)
-            if (piece->piece[iy][ix] == '*')
-            {
-                d = 1;
-                while (d++ < 4)
-                    if (ix + x + d < map->max_size_x && ix + x - d > 0
-                        && iy + y + d < map->max_size_y && iy + y - d > 0)
-                        if (map->map[iy + y][ix + x + d] == map->opp[0] ||
-                            map->map[iy + y][ix + x - d] == map->opp[0] ||
-                            map->map[iy + y + d][ix + x] == map->opp[0] ||
-                            map->map[iy + y - d][ix + x] == map->opp[0])
-                            piece->much_touch += 4 - d;
-            }
-    }
-    return (piece->much_touch);
-}
-
 void    actual_piece_size(t_piece *piece)
 {
     int     x;
@@ -104,8 +52,8 @@ void    fill_piece(t_piece *piece)
     while (i < piece->y_size)
     {
         get_next_line(0, &line);
-        piece->piece = (char*)malloc(sizeof(char *) * (piece->x_size + 1));
-        piece->piece = ft_strcpy(piece->piece[i], (const char *)line);
+        piece->piece[i]= (char *)malloc(sizeof(char *) * (piece->x_size + 1));
+        piece->piece[i] = ft_strcpy(piece->piece[i], (const char *)line);
         i++;
         ft_strdel(&line);
     }
@@ -117,7 +65,7 @@ void    parse_piece_size(t_piece *piece, char *line)
     int     temp;
 
     i = 0;
-    while (line[temp])
+    while (line[i])
     {
         temp = 0;
         while (ft_isdigit(temp + 1) == 0 && line[temp])
@@ -130,7 +78,7 @@ void    parse_piece_size(t_piece *piece, char *line)
         if (piece->y_size == 0)
             piece->y_size = temp;
         else if (piece->x_size == 0)
-            piece->x_size == temp;
+            piece->x_size = temp;
         i++;
     }
     ft_strdel(&line);

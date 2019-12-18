@@ -36,6 +36,7 @@ int valid_spot(t_piece *piece, t_map *map, int x, int y)
         return (1);
     while (y1++ < piece->y_size - 1)
     {
+        x1 = 0;
         while (x1++ < piece->x_size - 1)
         {
             if (piece->piece[y1][x1] == '*' && (map->map[y + y1][x + x1] ==
