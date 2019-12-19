@@ -17,22 +17,22 @@ void    actual_piece_size(t_piece *piece)
     int     x;
     int     y;
 
-    y = 0;
+    y = -1;
     piece->y_start = piece->y_size;
     piece->x_start = piece->x_size;
-    while (y++ < piece->y_size)
+    while (++y < piece->y_size)
     {
-        x = 0;
-        while (x++ < piece->x_size)
+        x = -1;
+        while (++x < piece->x_size)
             if (piece->piece[y][x] == '*')
             {
-                if (x < piece->x_start)
+                if (x <= piece->x_start)
                     piece->x_start = x;
                 else if (x > piece->x_end)
                     piece->x_end = x;
-                if (y < piece->y_start)
+                if (y <= piece->y_start)
                     piece->y_start = y;
-                else if (y < piece->y_end)
+                else if (y > piece->y_end)
                     piece->y_end = y;
             }
     }
@@ -52,11 +52,10 @@ void    fill_piece(t_piece *piece)
     while (i < piece->y_size)
     {
         get_next_line(0, &line);
-        piece->piece[i]= (char *)malloc(sizeof(char *) * (piece->x_size + 1));
-        piece->piece[i] = ft_strcpy(piece->piece[i], (const char *)line);
+        piece->piece[i] = line;
         i++;
-        ft_strdel(&line);
     }
+    actual_piece_size(piece);
 }
 
 void    parse_piece_size(t_piece *piece, char *line)
@@ -65,10 +64,12 @@ void    parse_piece_size(t_piece *piece, char *line)
     int     temp;
 
     i = 0;
+    piece->x_size = 0;
+    piece->y_size = 0;
     while (line[i])
     {
         temp = 0;
-        while (ft_isdigit(temp + 1) == 0 && line[temp])
+        while (ft_isdigit(line[i]) == 1 && line[i])
         {
             temp += line[i] - 48;
             if (ft_isdigit(line[i + 1]) == 0)
@@ -79,7 +80,7 @@ void    parse_piece_size(t_piece *piece, char *line)
             piece->y_size = temp;
         else if (piece->x_size == 0)
             piece->x_size = temp;
-        i++;
+        i += (line[i]) ? 1 : 0;
     }
     ft_strdel(&line);
     fill_piece(piece);

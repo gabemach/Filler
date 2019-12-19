@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 12:21:27 by gmachado          #+#    #+#             */
-/*   Updated: 2019/12/16 16:32:40 by gmachado         ###   ########.fr       */
+/*   Updated: 2019/12/18 13:44:05 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ int     parse_arrays(t_map *map, t_piece *piece)
 {
     char    *line;
 
+    piece->piece = NULL;
     while (get_next_line(0, &line) == 1)
     {
-        if (ft_strncmp(line, "Plateau", 7 == 0))
+        if (ft_strncmp(line, "Plateau", 6 == 0))
         {
             parse_map(line, map);
             ft_strdel(&line);
         }
-        else if (ft_strncmp(line, "Piece", 4))
+        else if (ft_strncmp(line, "Piece", 4) == 0)
         {
             parse_piece_size(piece, line);
             return (1);

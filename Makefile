@@ -6,11 +6,11 @@
 #    By: gmachado <gmachado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/24 12:00:34 by gmachado          #+#    #+#              #
-#    Updated: 2019/12/17 14:28:27 by gmachado         ###   ########.fr        #
+#    Updated: 2019/12/17 18:02:15 by gmachado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = gmachado.filler
+NAME = resources/players/gmachado.filler
 
 HEADER = \
 		-I ./includes/filler.h
@@ -28,7 +28,6 @@ SRCS = \
 		./srcs/players.c \
 		./srcs/checker1.c \
 		./srcs/checker2.c \
-		./srcs/misc.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -38,7 +37,7 @@ $(NAME):
 	@ echo Compiling...
 	@ make -C includes/libft
 	@ make -C includes/ft_printf
-	@ gcc $(CFLAGS) -o $(NAME) $(SRCS) $(ARCHIVE)
+	@ gcc $(CFLAGS) -o $(NAME) $(SRCS) $(ARCHIVE) -fsanitize=address
 	@ echo Finished Compiling! Run with ./resources/filler program
 clean:
 	@ make -C ./includes/libft clean
